@@ -1,6 +1,5 @@
-<php?
+<?php  ?>
 
-?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -21,6 +20,14 @@
 			<form action="list.php" method="get">
 				<input type="text" name="address" />
 				<input type="submit" value="検索" />
+				<?php
+			$sql = "select * from movies where title like :title"; 
+            $pstmt = $pdo->prepare($sql); 
+            $params = []; 
+            $params[":title"] = "%awake%"; 
+            $pstmt->execute($params); 
+				?>
+				
 			</form>
 		</article>
 	</main>
