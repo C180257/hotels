@@ -4,7 +4,7 @@
  */
 // データベース接続情報
 $dsn = "mysql:host=localhost;dbname=hoteldb";
-$user = "hoteldb_admin@localhost";
+$user = "hoteldb_admin";
 $password = "admin123";
 
 // データベースに接続
@@ -29,5 +29,10 @@ try {
 
 	*/
 	echo $e->getMessage();
+}
+if(!is_null($pdo)){
+    echo "データベースに接続に成功しました。";
+}else{
+    echo "データベースに接続に失敗しました。";
 }
 ?>

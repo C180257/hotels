@@ -1,25 +1,28 @@
 <?php
-//step1 
-$area = -1;
-if (isset($_REQUEST["area"])) {
-    $area = $_REQUEST["area"];
-}
-//step2 lay du lieu database
-$pdo = connectDatabase();
-//step3 chay du lieu Sql
-$sql = "select * from restaurants where area=:area?"; //$sql - "select * from restaurants where area=:area?";
-//step4 chuyen du an vao sql
-$pstmt = $pdo->prepare($sql);
-//step5 dieu chinh thong tin trong sql
-$psttmt->bindValue(1,$area);
-$params[":area"] = $area;
-//step6  chay SQL
-$psttmt->execute($params);
-//step7 set ket qua
-$rs = $psttmt->fetchAll();
-//step8 cho ket qua vao day 
+require_once("..//database.php");
+require_once("..//use_pdo.php");
+require_once("..//class.php");
+
+$pdo= connectDatabase();
+$sql= "select * from hotels";
+
+$pstmt = $pdo -> prepare($sql);
+$pstmt -> execute();
+$rs = $pstmt -> fetchAll();
 disconnectDatabase($pdo);
-$restaurant = [];
+$hotels[];
+foreach ($rs as $record){
+    $id = intval($record["id"]);
+    $name = $record["name"];
+    $price =intval($record["price"]);
+    $pref = $record["pref"];
+    $city = $record["city"];
+    $address =$record["address"];
+    $memo =$record["memo"];
+    $image =$record["image"];
+    $hotel = new Hotel($id,$name,$price,$pref,$city,$address,$memo,$image);
+    $hotels[] = $hotel;
+}
 
 ?>
 <!DOCTYPE html>
